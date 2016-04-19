@@ -1,0 +1,14 @@
+html
+  head
+    title=title
+    link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
+  body
+    div.container
+      div.jumbotron
+        h1 Hello!
+        p Welcome to my app, ready to get started?
+      div.wormholefilter
+        form(name="wormholefilter", action="/wormholefilter", method="post")
+          input(type="text", name="bookmarks")
+          input(type="text", name="signatures")
+          input(type="submit", value="submit")
