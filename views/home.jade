@@ -9,6 +9,6 @@ html
         p Welcome to my app, ready to get started?
       div.wormholefilter
         form(name="wormholefilter", action="/wormholefilter", method="post")
-          input(type="text", name="bookmarks")
-          input(type="text", name="signatures")
+          textarea(type="textarea", name="bookmarks")
+          textarea(type="textarea", name="signatures")
           input(type="submit", value="submit")

@@ -1,8 +1,12 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var os = require('os');
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+//for parsing csv formats
+var csvparser = require('csv-parse')
 
 
 app.set('views', './views');
@@ -24,7 +28,12 @@ app.post('/wormholefilter', urlencodedParser, function (req, res) {
         signatures:req.body.signatures
     };
 
-    console.log(response);
+    var bookmarksSplit = response.bookmarks.match(/^.*((\r\n|\n|\r)|$)/gm);
+    var bookmarkSigIds = bookmarksSplit.map(function(obj){
+      return obj.slice(0,3);
+    })
+
+    console.log(bookmarkSigIds);
 
    res.send('Hello wormholefilter POST');
 })
