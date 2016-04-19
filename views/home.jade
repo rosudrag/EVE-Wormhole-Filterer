@@ -5,10 +5,17 @@ html
   body
     div.container
       div.jumbotron
-        h1 Hello!
-        p Welcome to my app, ready to get started?
+        h1 Hello therajew!
+        p Work In Progress app to filter out already scanned anomalies.
+        p First textbox: copy paste bookmark selections
+        p Second textbox: copy paste all anomalies
       div.wormholefilter
         form(name="wormholefilter", action="/wormholefilter", method="post")
           textarea(type="textarea", name="bookmarks")
           textarea(type="textarea", name="signatures")
           input(type="submit", value="submit")
+      if wormholeFilterResult
+        for result in wormholeFilterResult
+          p= result
+      else
+        p bla bla

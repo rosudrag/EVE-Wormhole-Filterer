@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var os = require('os');
+var _ = require('underscore');
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -33,9 +34,21 @@ app.post('/wormholefilter', urlencodedParser, function (req, res) {
       return obj.slice(0,3);
     })
 
-    console.log(bookmarkSigIds);
+    var signaturesSplit = response.signatures.match(/^.*((\r\n|\n|\r)|$)/gm);
+    var signaturesSigIds = signaturesSplit.map(function(obj){
+      return obj.slice(0,3);
+    })
 
-   res.send('Hello wormholefilter POST');
+    var difference = _.difference(signaturesSigIds, bookmarkSigIds);
+
+    console.log(bookmarkSigIds);
+    console.log(signaturesSigIds);
+    console.log(difference);
+
+    res.render('home', {
+      title: 'Welcome',
+      wormholeFilterResult: difference
+    });
 })
 
 app.listen(80);
