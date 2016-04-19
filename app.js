@@ -6,10 +6,6 @@ var _ = require('underscore');
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-//for parsing csv formats
-var csvparser = require('csv-parse')
-
-
 app.set('views', './views');
 app.set('view engine', 'jade');
 
