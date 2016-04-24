@@ -21,5 +21,14 @@ html
               input(type="submit", value="submit", class="btn-primary")
         if wormholeFilterResult
           div.column
-            for result in wormholeFilterResult
-              p= result
+            table(class="table table-striped table-bordered table-hover")
+              thead
+                tr: th Sigs
+                    th Status
+              tbody
+                for result in wormholeFilterResult
+                  tr
+                    td 
+                      p=result
+                    td
+                      p="not scanned"
