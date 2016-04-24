@@ -8,8 +8,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.set('views', './views');
 app.set('view engine', 'jade');
-app.use(express.static('/public'));
-app.use("/styles", express.static(__dirname + '/styles'));
+//app.use(express.static('/public'));
+//app.use("/styles", express.static(__dirname + '/styles'));
 app.use(express.static(__dirname + '/public'));
 
 app.set('port', (process.env.PORT || 5000));
@@ -41,10 +41,6 @@ app.post('/wormholefilter', urlencodedParser, function (req, res) {
     })
 
     var difference = _.difference(signaturesSigIds, bookmarkSigIds);
-
-    console.log(bookmarkSigIds);
-    console.log(signaturesSigIds);
-    console.log(difference);
 
     res.render('home', {
       title: 'Welcome',

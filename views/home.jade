@@ -1,21 +1,25 @@
 html
   head
     title=title
-    link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/bootstrap.min.css', rel='stylesheet')
     link(href='/main.css', rel='stylesheet')
   body
-    div.container
-      div.jumbotron
-        h1 Hello therajew!
-        <a href="http://puu.sh/ooDAG/d77dc27a78.png"> Example</a>
-        p Work In Progress app to filter out already scanned anomalies.
-        p First textbox: copy paste bookmark selections
+    div.container.container-flex
+      div.jumbotron.left-column
+        h1 Hello theraguy!
+        p Work In Progress app to find sigs that haven't been scanned yet.
+        p First textbox: copy paste existing bookmarks
         p Second textbox: copy paste all anomalies
-      div.wormholefilter
+      div.right-column
         form(name="wormholefilter", action="/wormholefilter", method="post")
-          textarea(type="textarea", name="bookmarks")
-          textarea(type="textarea", name="signatures")
-          input(type="submit", value="submit")
-      if wormholeFilterResult
-        for result in wormholeFilterResult
-          p= result
+          section
+            div.column
+              textarea(type="textarea", name="bookmarks", class="form-control", placeholder = "Your bookmarks copy paste")
+            div.column  
+              textarea(type="textarea", name="signatures", class="form-control", placeholder = "Your cosmic anomalies copy paste")
+            div.column
+              input(type="submit", value="submit", class="btn-primary")
+        if wormholeFilterResult
+          div.column
+            for result in wormholeFilterResult
+              p= result

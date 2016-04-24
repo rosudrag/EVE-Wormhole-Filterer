@@ -1,0 +1,37 @@
+.container-flex {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.left-column{
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+
+.right-column{
+  -webkit-flex: 3;
+          flex: 3;
+}
+
+.column {
+  margin: 10px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+section {
+  max-width: 740px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.vertical-container {
+  height: 800px;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
