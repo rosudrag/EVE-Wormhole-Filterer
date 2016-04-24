@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
 });
 
 // This responds a POST request for the homepage
-app.post('/wormholefilter', urlencodedParser, function (req, res) {
+app.post('/', urlencodedParser, function (req, res) {
    console.log("Got a POST request for the wormholefilter");
 
    // Prepare output in JSON format
