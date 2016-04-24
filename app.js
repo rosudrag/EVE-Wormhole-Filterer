@@ -8,6 +8,9 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.set('views', './views');
 app.set('view engine', 'jade');
+app.use(express.static('/public'));
+app.use("/styles", express.static(__dirname + '/styles'));
+app.use(express.static(__dirname + '/public'));
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -45,7 +48,9 @@ app.post('/wormholefilter', urlencodedParser, function (req, res) {
 
     res.render('home', {
       title: 'Welcome',
-      wormholeFilterResult: difference
+      wormholeFilterResult: difference,
+      bookmarks: response.bookmarks,
+      signatures: response.signatures,
     });
 })
 
