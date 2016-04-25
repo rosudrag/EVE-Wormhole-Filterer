@@ -1,26 +1,25 @@
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
 var os = require('os');
 var _ = require('underscore');
-// Create application/x-www-form-urlencoded parser
+var request = require('request');
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+var app = express();
 app.set('views', './views');
 app.set('view engine', 'jade');
-//app.use(express.static('/public'));
-//app.use("/styles", express.static(__dirname + '/styles'));
 app.use(express.static(__dirname + '/public'));
-
 app.set('port', (process.env.PORT || 5000));
 
+
+//Routes
 app.get('/', function(req, res) {
   res.render('home', {
     title: 'Welcome'
   });
 });
 
-// This responds a POST request for the homepage
 app.post('/', urlencodedParser, function (req, res) {
    console.log("Got a POST request for the wormholefilter");
 
@@ -41,6 +40,21 @@ app.post('/', urlencodedParser, function (req, res) {
     })
 
     var difference = _.difference(signaturesSigIds, bookmarkSigIds);
+
+    request({url: 'https://www.eve-scout.com/api/wormholes', json: true}, function(err, res, json) {
+      if (err) {
+        console.log("timeout");
+      }
+      var evescoutlist = json;
+      var filteredevescoutlist = _.filter(evescoutlist, function(a){
+          return _.find(difference, function(b){
+              return b === a.signatureId;
+          });
+      });
+      console.log(evescoutlist[0]);
+      console.log("my filtered ones");
+      console.log(filteredevescoutlist);
+    });
 
     res.render('home', {
       title: 'Welcome',
