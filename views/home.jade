@@ -1,6 +1,6 @@
 html
   head
-    title Wormhole Filtering App - DRR
+    title=title
     link(href='/css/bootstrap.min.css', rel='stylesheet')
     link(href='/main2.css', rel='stylesheet')
     script(src='/js/jquery.min.js')
@@ -21,6 +21,14 @@ html
           ul
             li
               p added eve-scout pulling for unscanned sigs
+        div
+          p Example data:
+          ul
+            li
+              a(href='/testdataWormhole', target='_blank') Test Wormholes
+            li
+              a(href='/testdataSignatures', target='_blank') Test Signatures
+            
       div.right-column
         form(name="wormholefilter", action="/", method="post")
           section

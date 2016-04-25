@@ -27,13 +27,15 @@ app.get('/', function(req, res) {
   });
 });
 
+
 //Routes
-app.get('/test', function(req, res) {
-  res.render('hometest', {
-    title: 'Welcome'
-  });
+app.get('/testdataWormhole', function(req, res) {
+  res.sendFile(__dirname + '/views/testdataWormhole.txt');
 });
 
+app.get('/testdataSignatures', function(req, res) {
+  res.sendFile(__dirname + '/views/testdataSignatures.txt');
+});
 
 app.post('/', urlencodedParser, function (req, res) {
    console.log("Got a POST request for the wormholefilter");
