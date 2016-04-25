@@ -27,6 +27,14 @@ app.get('/', function(req, res) {
   });
 });
 
+//Routes
+app.get('/test', function(req, res) {
+  res.render('hometest', {
+    title: 'Welcome'
+  });
+});
+
+
 app.post('/', urlencodedParser, function (req, res) {
    console.log("Got a POST request for the wormholefilter");
 
