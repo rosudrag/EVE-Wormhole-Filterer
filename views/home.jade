@@ -5,9 +5,9 @@ html
     link(href='/main.css', rel='stylesheet')
     script(src='/js/jquery.min.js')
     script(src='/js/bootstrap.min.js')
-  body
-    div.container.container-flex
-      div.jumbotron.left-column
+  body.Site
+    div.container
+      div.Jumbotron.left-column
         h1 Hello theraguy!
         p Work In Progress app to find sigs that haven't been scanned yet.
         p First textbox: copy paste existing bookmarks
@@ -34,6 +34,10 @@ html
                       p=result
                     td
                       p="not scanned"
-
-  footer
-    a https://github.com/rosudrag/EVE-Wormhole-Filterer
+    div.flex-container.flex-center
+      footer
+        div.flex-container.flex-center
+          p.foo
+            | Developed with love by&nbsp;
+            a(href='http://rosudrag.github.io/', target='_blank') DRR
+        a.flex-center(href='https://github.com/rosudrag/EVE-Wormhole-Filterer', target='_blank') EVE-Wormhole-Filterer Opensource github repository
