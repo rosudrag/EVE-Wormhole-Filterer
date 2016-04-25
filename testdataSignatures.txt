@@ -1,4 +1,4 @@
-ZSO-553	Cosmic Signature			0%	139.07 AU
+DNI-553	Cosmic Signature			0%	139.07 AU
 ZQR-250	Cosmic Signature			0%	147.40 AU
 ZHI-909	Cosmic Signature			0%	147.31 AU
 ZGU-677	Cosmic Signature			0%	151.31 AU

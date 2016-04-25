@@ -48,7 +48,8 @@ app.post('/', urlencodedParser, function (req, res) {
 
     var difference = _.difference(signaturesSigIds, bookmarkSigIds);
 
-    request({url: 'https://www.eve-scout.com/api/wormholes', json: true}, function(err, res, json) {
+    var mySigs = {};
+    request({url: 'https://www.eve-scout.com/api/wormholes', json: true}, function(err, resES, json) {
       if (err) {
         console.log("timeout");
       }
@@ -58,16 +59,35 @@ app.post('/', urlencodedParser, function (req, res) {
               return b === a.signatureId;
           });
       });
-      console.log(evescoutlist[0]);
-      console.log("my filtered ones");
-      console.log(filteredevescoutlist);
-    });
 
-    res.render('home', {
-      title: 'Welcome',
-      wormholeFilterResult: difference,
-      bookmarks: response.bookmarks,
-      signatures: response.signatures,
+      var myFilteredEveScoutDict = _.reduce(filteredevescoutlist, function (o, item) {
+        o[item.signatureId] = item; return o }, {}
+      );
+
+      _.each(difference, function(mySigId){
+        var currentES = myFilteredEveScoutDict[mySigId];
+        if(currentES){
+          mySigs[mySigId] = {
+            signatureId: mySigId,
+            destination: currentES.destinationSolarSystem.name,
+            status: "evescout"
+          };
+        }
+        else{
+          mySigs[mySigId] = {
+            signatureId: mySigId,
+            destination: "unknown",
+            status: "unscanned"
+          };
+        }
+      });
+      res.render('home', {
+        title: 'Welcome',
+        wormholeFilterResult: difference,
+        bookmarks: response.bookmarks,
+        signatures: response.signatures,
+        supersignatures: mySigs
+      });
     });
 })
 
