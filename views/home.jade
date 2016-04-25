@@ -1,8 +1,10 @@
 html
   head
     title=title
-    link(href='/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
     link(href='/main.css', rel='stylesheet')
+    script(src='/js/jquery.min.js')
+    script(src='/js/bootstrap.min.js')
   body
     div.container.container-flex
       div.jumbotron.left-column
@@ -15,7 +17,7 @@ html
           section
             div.column
               textarea(type="textarea", name="bookmarks", class="form-control", placeholder = "Your bookmarks copy paste")
-            div.column  
+            div.column
               textarea(type="textarea", name="signatures", class="form-control", placeholder = "Your cosmic anomalies copy paste")
             div.column
               input(type="submit", value="submit", class="btn-primary")
@@ -28,7 +30,7 @@ html
               tbody
                 for result in wormholeFilterResult
                   tr
-                    td 
+                    td
                       p=result
                     td
                       p="not scanned"
