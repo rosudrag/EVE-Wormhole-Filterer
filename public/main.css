@@ -1,14 +1,23 @@
 body {
-  display: flex;
-  min-height: 100vh;
-  height: 100vh;
-  flex-direction: column;
-  margin: 0% 5% 0% 5%;
+  display:flex;
+  justify-content:center;
 }
 
-main {
-  flex: 1 0 auto;
+body > div > main {
+  flex: 1;
   display: flex;
+  min-height:400px;
+}
+
+body > div > footer{
+  height:100px;
+  order:5;
+  flex:0 1 100%;
+}
+
+.mainBodyContainer{
+  display:flex;
+  flex-flow:row wrap;
 }
 
 main div #Changelog{
@@ -28,17 +37,16 @@ footer div{
 }
 
 
-footer p{
+footer p,a{
   align-self: center;
 }
 
 .left-column{
-  flex: 1;
+  flex:0 1 200px;
   height: auto;
   padding-left: 20px;
   padding-right: 20px;
 }
-
 
 .right-column{
   flex: 4;
