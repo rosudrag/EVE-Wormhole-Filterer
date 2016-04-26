@@ -80,6 +80,7 @@ app.post('/', urlencodedParser, function (req, res) {
           mySigs[mySigId] = {
             signatureId: mySigId,
             destination: currentES.destinationSolarSystem.name,
+            region: currentES.destinationSolarSystem.region.name,
             status: "evescout"
           };
         }
@@ -87,6 +88,7 @@ app.post('/', urlencodedParser, function (req, res) {
           mySigs[mySigId] = {
             signatureId: mySigId,
             destination: "unknown",
+            region: "unknown",
             status: "unscanned"
           };
         }
