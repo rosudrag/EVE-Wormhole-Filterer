@@ -79,33 +79,18 @@ app.post('/', urlencodedParser, function (req, res) {
       _.each(missingScanned, function(mySigId){
         var currentES = myFilteredEveScoutDict[mySigId];
         if(currentES){
-          mySigs[mySigId] = {
-            signatureId: mySigId,
-            destination: currentES.destinationSolarSystem.name,
-            region: currentES.destinationSolarSystem.region.name,
-            status: "evescout"
-          };
+          mySigs[mySigId] = createCosmicSigModel(mySigId, currentES.destinationSolarSystem.name, currentES.destinationSolarSystem.region.name, "evescout");
         }
         else{
-          mySigs[mySigId] = {
-            signatureId: mySigId,
-            destination: "unknown",
-            region: "unknown",
-            status: "unscanned"
-          };
+          mySigs[mySigId] = createCosmicSigModel(mySigId, "unknown", "unknown", "unscanned");
         }
       });
 
       //add expired ones
       _.each(expired, function(expiredId){
-        mySigs[expiredId] =
-        {
-          signatureId: expiredId,
-          destination: "expired",
-          region: "expired",
-          status: "expired",
-        };
+        mySigs[expiredId] = createCosmicSigModel(expiredId, "expired", "expired", "expired");
       });
+      
       res.render('home', {
         title: 'Welcome',
         wormholeFilterResult: missingScanned,
@@ -115,6 +100,15 @@ app.post('/', urlencodedParser, function (req, res) {
       });
     });
 })
+
+function createCosmicSigModel(sigId, destination, region, status){
+  return {
+    signatureId: sigId,
+    destination: destination,
+    region: region,
+    status: status
+  };
+}
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
