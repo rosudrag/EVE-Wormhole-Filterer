@@ -23,20 +23,12 @@ app.set('port', (process.env.PORT || 5000));
 //Routes
 app.get('/', function(req, res) {
   res.render('home', {
-    title: 'Welcome'
+    title: 'Thera Wormhole Filter App'
   });
 });
 
 
 //Routes
-app.get('/testdataWormhole', function(req, res) {
-  res.sendFile(__dirname + '/views/testdataWormhole.txt');
-});
-
-app.get('/testdataSignatures', function(req, res) {
-  res.sendFile(__dirname + '/views/testdataSignatures.txt');
-});
-
 app.post('/', urlencodedParser, function (req, res) {
    console.log("Got a POST request for the wormholefilter");
 
@@ -46,18 +38,11 @@ app.post('/', urlencodedParser, function (req, res) {
         signatures:req.body.signatures
     };
 
-    var bookmarksSplit = response.bookmarks.match(/^.*((\r\n|\n|\r)|$)/gm);
-    var bookmarkSigIds = bookmarksSplit.map(function(obj){
-      return obj.slice(0,3);
-    })
+    var bookmarkSigIds = getSigIds(response.bookmarks);
+    var signaturesSigIds = getSigIds(response.signatures);
 
-    var signaturesSplit = response.signatures.match(/^.*((\r\n|\n|\r)|$)/gm);
-    var signaturesSigIds = signaturesSplit.map(function(obj){
-      return obj.slice(0,3);
-    })
-
-    var missingScanned = _.difference(signaturesSigIds, bookmarkSigIds);
-    var expired = _.difference(bookmarkSigIds, signaturesSigIds);
+    var missingScannedIds = _.difference(signaturesSigIds, bookmarkSigIds);
+    var expiredIds = _.difference(bookmarkSigIds, signaturesSigIds);
 
     var mySigs = {};
 
@@ -67,7 +52,7 @@ app.post('/', urlencodedParser, function (req, res) {
       }
       var evescoutlist = json;
       var filteredevescoutlist = _.filter(evescoutlist, function(a){
-          return _.find(missingScanned, function(b){
+          return _.find(missingScannedIds, function(b){
               return b === a.signatureId;
           });
       });
@@ -76,7 +61,7 @@ app.post('/', urlencodedParser, function (req, res) {
         o[item.signatureId] = item; return o }, {}
       );
 
-      _.each(missingScanned, function(mySigId){
+      _.each(missingScannedIds, function(mySigId){
         var currentES = myFilteredEveScoutDict[mySigId];
         if(currentES){
           mySigs[mySigId] = createCosmicSigModel(mySigId, currentES.destinationSolarSystem.name, currentES.destinationSolarSystem.region.name, "evescout");
@@ -87,15 +72,12 @@ app.post('/', urlencodedParser, function (req, res) {
       });
 
       //add expired ones
-      _.each(expired, function(expiredId){
+      _.each(expiredIds, function(expiredId){
         mySigs[expiredId] = createCosmicSigModel(expiredId, "expired", "expired", "expired");
       });
-      
+
       res.render('home', {
-        title: 'Welcome',
-        wormholeFilterResult: missingScanned,
-        bookmarks: response.bookmarks,
-        signatures: response.signatures,
+        title: 'Thera Wormhole Filter App',
         supersignatures: mySigs
       });
     });
@@ -108,6 +90,14 @@ function createCosmicSigModel(sigId, destination, region, status){
     region: region,
     status: status
   };
+}
+
+function getSigIds(input){
+  var inputSplit = input.match(/^.*((\r\n|\n|\r)|$)/gm);
+  var sigIds = inputSplit.map(function(obj){
+    return obj.slice(0,3);
+  })
+  return sigIds;
 }
 
 app.listen(app.get('port'), function() {
