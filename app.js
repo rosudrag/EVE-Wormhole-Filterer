@@ -56,16 +56,18 @@ app.post('/', urlencodedParser, function (req, res) {
       return obj.slice(0,3);
     })
 
-    var difference = _.difference(signaturesSigIds, bookmarkSigIds);
+    var missingScanned = _.difference(signaturesSigIds, bookmarkSigIds);
+    var expired = _.difference(bookmarkSigIds, signaturesSigIds);
 
     var mySigs = {};
+
     request({url: 'https://www.eve-scout.com/api/wormholes', json: true}, function(err, resES, json) {
       if (err) {
         console.log("timeout");
       }
       var evescoutlist = json;
       var filteredevescoutlist = _.filter(evescoutlist, function(a){
-          return _.find(difference, function(b){
+          return _.find(missingScanned, function(b){
               return b === a.signatureId;
           });
       });
@@ -74,7 +76,7 @@ app.post('/', urlencodedParser, function (req, res) {
         o[item.signatureId] = item; return o }, {}
       );
 
-      _.each(difference, function(mySigId){
+      _.each(missingScanned, function(mySigId){
         var currentES = myFilteredEveScoutDict[mySigId];
         if(currentES){
           mySigs[mySigId] = {
@@ -93,9 +95,20 @@ app.post('/', urlencodedParser, function (req, res) {
           };
         }
       });
+
+      //add expired ones
+      _.each(expired, function(expiredId){
+        mySigs[expiredId] =
+        {
+          signatureId: expiredId,
+          destination: "expired",
+          region: "expired",
+          status: "expired",
+        };
+      });
       res.render('home', {
         title: 'Welcome',
-        wormholeFilterResult: difference,
+        wormholeFilterResult: missingScanned,
         bookmarks: response.bookmarks,
         signatures: response.signatures,
         supersignatures: mySigs
