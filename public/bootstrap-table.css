@@ -32,6 +32,7 @@
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
+    padding-bottom: 5%
 }
 
 .fixed-table-container.table-no-bordered {
@@ -48,9 +49,6 @@
 }
 
 .fixed-table-body {
-    overflow-x: auto;
-    overflow-y: auto;
-    height: 100%;
 }
 
 .fixed-table-container table {

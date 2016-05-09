@@ -62,3 +62,7 @@ section {
   flex-grow: 1;
   flex-shrink: 1;
 }
+
+.tableoverflowcontainer .bootstrap-table:first-child{
+  padding-bottom: 5%;
+}

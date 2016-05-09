@@ -44,7 +44,7 @@ app.post('/', urlencodedParser, function (req, res) {
     var missingScannedIds = _.difference(signaturesSigIds, bookmarkSigIds);
     var expiredIds = _.difference(bookmarkSigIds, signaturesSigIds);
 
-    var mySigs = {};
+
 
     request({url: 'https://www.eve-scout.com/api/wormholes', json: true}, function(err, resES, json) {
       if (err) {
@@ -61,6 +61,7 @@ app.post('/', urlencodedParser, function (req, res) {
         o[item.signatureId] = item; return o }, {}
       );
 
+      var mySigs = {};
       _.each(missingScannedIds, function(mySigId){
         var currentES = myFilteredEveScoutDict[mySigId];
         if(currentES){
@@ -72,13 +73,15 @@ app.post('/', urlencodedParser, function (req, res) {
       });
 
       //add expired ones
+      var expiredSigs = {};
       _.each(expiredIds, function(expiredId){
-        mySigs[expiredId] = createCosmicSigModel(expiredId, "expired", "expired", "expired");
+        expiredSigs[expiredId] = createCosmicSigModel(expiredId, "expired", "expired", "expired");
       });
 
       res.render('home', {
         title: 'Thera Wormhole Filter App',
-        supersignatures: mySigs
+        supersignatures: mySigs,
+        expiredsignatures: expiredSigs
       });
     });
 })
