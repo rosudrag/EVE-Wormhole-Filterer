@@ -18,10 +18,9 @@ html
       ga('send', 'pageview');
 
   body
-    div.mainBodyContainer
-      header
-      main
-        div.jumbotron.left-column
+    section.page-section
+      div.row.center-xs
+        div.jumbotron.col-xs-3
           h1 Hello theraguy!
           p WIP app that finds sigs that haven't been scanned yet.
           ul
@@ -43,7 +42,7 @@ html
               li
                 a(href='http://gifyu.com/images/whf1.gif', target='_blank') How to use GIF
               
-        div.right-column
+        div.col-xs-9
           form(name="wormholefilter", action="/", method="post")
             section
               div.column
@@ -80,9 +79,10 @@ html
                         p=result.signatureId
                       td
                         p=result.status
-      footer
-        div
-          p
-            | Developed with love by&nbsp;
-            a(href='http://rosudrag.github.io/', target='_blank') DRR
-          a(class='flex-center', href='https://github.com/rosudrag/EVE-Wormhole-Filterer', target='_blank') EVE-Wormhole-Filterer Opensource github repository
+        div.col-xs-12
+          div.row.center-xs
+            div.col-xs-12
+              p
+                | Developed with love by&nbsp;
+                a(href='http://rosudrag.github.io/', target='_blank') DRR
+              a(class='flex-center', href='https://github.com/rosudrag/EVE-Wormhole-Filterer', target='_blank') EVE-Wormhole-Filterer Opensource github repository
