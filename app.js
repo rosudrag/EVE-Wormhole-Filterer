@@ -28,6 +28,13 @@ app.get('/', function(req, res) {
   });
 });
 
+//Routes
+app.get('/test', function(req, res) {
+  res.render('test', {
+    title: 'Thera Wormhole Filter App'
+  });
+});
+
 
 //Routes
 app.post('/', urlencodedParser, function (req, res) {

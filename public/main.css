@@ -66,3 +66,23 @@ section {
 .tableoverflowcontainer .bootstrap-table:first-child{
   padding-bottom: 5%;
 }
+
+
+
+.page {
+    z-index: 0;
+}
+
+.hero {
+    box-sizing: border-box;
+    padding: 2rem;
+    background: #FFF;
+    border: 1px solid #FFF;
+    border-radius: 2px
+}
+
+.hero-headline {
+    font-size: 3rem;
+    white-space: nowrap;
+    margin-bottom: 0
+}
