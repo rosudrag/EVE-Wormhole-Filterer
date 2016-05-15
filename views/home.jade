@@ -1,7 +1,7 @@
 html
   head
     title=title
-    link(href='/main-test.css', rel='stylesheet')
+    link(href='/main.css', rel='stylesheet')
     link(href='/css/flexboxgrid.css', rel='stylesheet')
     link(href='/css/bootstrap.css', rel='stylesheet')
     link(href='/css/less-space.css', rel='stylesheet')
@@ -16,11 +16,12 @@ html
 
   body.layout
     div.page
-      header.hero
-        div.row.center-xs
-          h1.hero-headline Thera Inspector
-        div.row.center-xs
-          h2.hero-headline Inspects yours holes so you don't have to
+      div.container
+        header.jumbotron
+          div.row.center-xs
+            h1.hero-headline Thera Inspector
+          div.row.center-xs
+            p.hero-headline Inspects yours holes so you don't have to
       div.wrap.container-fluid
         section.page-section
           form(name="wormholefilter", action="/", method="post")
