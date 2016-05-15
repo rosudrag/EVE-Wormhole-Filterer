@@ -17,6 +17,7 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); /
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 app.use('/css', express.static(__dirname + '/node_modules/flexboxgrid/css'));
+app.use('/css', express.static(__dirname + '/bower_components/less-space/dist'));
 
 app.set('port', (process.env.PORT || 5000));
 
