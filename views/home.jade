@@ -14,14 +14,14 @@ html
       ga('create', 'UA-76951311-1', 'auto');
       ga('send', 'pageview');
 
-  body.layout
+  body.layout.container
     div.page
       div.container
         header.jumbotron
           div.row.center-xs
             h1.hero-headline Thera Inspector
           div.row.center-xs
-            p.hero-headline Inspects yours holes so you don't have to
+            p.hero-headline Inspects your holes so you don't have to
       div.wrap.container-fluid
         section.page-section
           form(name="wormholefilter", action="/", method="post")
@@ -65,11 +65,11 @@ html
                           p=result.signatureId
                         td
                           p=result.status
-        footer.page-footer
-          div.row
-            div.col-xs.start-xs
-              p 
-                | Developed with love by&nbsp;
-                a(href='http://rosudrag.github.io/', target='_blank') DRR
-            div.col-xs-offset-6.col-xs.center-xs
-              a(class='flex-center', href='https://github.com/rosudrag/EVE-Wormhole-Filterer', target='_blank') EVE-Wormhole-Filterer github repo
+    footer.page-footer
+      div.row
+        div.col-xs.start-xs
+          p 
+            | Developed with love by&nbsp;
+            a(href='http://rosudrag.github.io/', target='_blank') DRR
+        div.col-xs-offset-6.col-xs.center-xs
+          a(class='flex-center', href='https://github.com/rosudrag/EVE-Wormhole-Filterer', target='_blank') EVE-Wormhole-Filterer github repo
