@@ -107,7 +107,7 @@ function createCosmicSigModel(sigId, destination, region, status){
 function getSigIds(input){
   var inputSplit = input.match(/^.*((\r\n|\n|\r)|$)/gm);
   var sigIds = inputSplit.map(function(obj){
-    return obj.slice(0,3);
+    return obj.slice(0,3).toUpperCase();
   })
   return sigIds;
 }

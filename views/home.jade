@@ -5,6 +5,10 @@ html
     link(href='/css/flexboxgrid.css', rel='stylesheet')
     link(href='/css/bootstrap.css', rel='stylesheet')
     link(href='/css/less-space.css', rel='stylesheet')
+    link(href='/bootstrap-table.css', rel='stylesheet')
+    script(src='/js/jquery.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/bootstrap-table.js')
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -39,32 +43,34 @@ html
           section.page-section
             div.tableoverflowcontainer
               if supersignatures
-                table(class="table table-striped table-bordered table-hover", data-toggle="table")
-                  thead
-                    tr: th(data-sortable="true") Sigs
-                        th(data-sortable="true") Destination    
-                        th(data-sortable="true") Region                
-                  tbody
-                    for result in supersignatures
-                      tr
-                        td
-                          p=result.signatureId
-                        td
-                          p=result.destination
-                        td
-                          p=result.region
+                div.table-container
+                  table(class="table table-striped table-bordered table-hover", data-toggle="table")
+                    thead
+                      tr: th(data-sortable="true") Sigs
+                          th(data-sortable="true") Destination    
+                          th(data-sortable="true") Region                
+                    tbody
+                      for result in supersignatures
+                        tr
+                          td
+                            p=result.signatureId
+                          td
+                            p=result.destination
+                          td
+                            p=result.region
               if expiredsignatures
-                table(class="table table-striped table-bordered table-hover", data-toggle="table")
-                  thead
-                    tr: th(data-sortable="true") Expired Signatures
-                        th(data-sortable="true") Status                  
-                  tbody
-                    for result in expiredsignatures
-                      tr
-                        td
-                          p=result.signatureId
-                        td
-                          p=result.status
+                div.table-container
+                  table(class="table table-striped table-bordered table-hover", data-toggle="table")
+                    thead
+                      tr: th(data-sortable="true") Expired Signatures
+                          th(data-sortable="true") Status                  
+                    tbody
+                      for result in expiredsignatures
+                        tr
+                          td
+                            p=result.signatureId
+                          td
+                            p=result.status
     footer.page-footer
       div.row
         div.col-xs.start-xs
