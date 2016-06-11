@@ -28,15 +28,12 @@ app.get('/', function(req, res) {
   });
 });
 
-//Routes
-app.get('/test', function(req, res) {
-  res.render('test', {
+app.get('/trade-hub-distance', function(req, res) {
+  res.render('tradehubdistancepage', {
     title: 'Thera Wormhole Filter App'
   });
 });
 
-
-//Routes
 app.post('/', urlencodedParser, function (req, res) {
    console.log("Got a POST request for the wormholefilter");
 
@@ -86,7 +83,7 @@ app.post('/', urlencodedParser, function (req, res) {
         expiredSigs[expiredId] = createCosmicSigModel(expiredId, "expired", "expired", "expired");
       });
 
-      res.render('home', {
+      res.render('wormholefilterpage', {
         title: 'Thera Wormhole Filter App',
         supersignatures: mySigs,
         expiredsignatures: expiredSigs

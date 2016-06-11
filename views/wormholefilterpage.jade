@@ -1,48 +1,47 @@
 extends ./layout
 
 block content
-  div.wrap.container-fluid
+  section.page-section
+    form(name="wormholefilter", action="/", method="post")
+      div.row.center-xs.around-xs.middle-xs
+        div.col-xs-12.col-sm-4
+          p Bookmarks
+          textarea(type="textarea", name="bookmarks", class="form-control xs-mb-10 md-mb-0", placeholder = "Copy paste your bookmarks ")
+        div.col-xs-12.col-sm-4
+          p Signatures
+          textarea(type="textarea", name="signatures", class="form-control xs-mb-10 md-mb-0", placeholder = "Copy paste your cosmic anomalies ")
+        div.col-xs-12.col-sm-2
+          br
+          input(type="submit", value="submit", class="btn-primary xs-mb-10 md-mb-0")
+  if supersignatures || expiredsignatures
     section.page-section
-      form(name="wormholefilter", action="/", method="post")
-        div.row.center-xs.around-xs.middle-xs
-          div.col-xs-12.col-sm-4
-            p Bookmarks
-            textarea(type="textarea", name="bookmarks", class="form-control xs-mb-10 md-mb-0", placeholder = "Copy paste your bookmarks ")
-          div.col-xs-12.col-sm-4
-            p Signatures
-            textarea(type="textarea", name="signatures", class="form-control xs-mb-10 md-mb-0", placeholder = "Copy paste your cosmic anomalies ")
-          div.col-xs-12.col-sm-2
-            br
-            input(type="submit", value="submit", class="btn-primary xs-mb-10 md-mb-0")
-    if supersignatures || expiredsignatures
-      section.page-section
-        div.tableoverflowcontainer
-          if supersignatures
-            div.table-container
-              table(class="table table-striped table-bordered table-hover", data-toggle="table")
-                thead
-                  tr: th(data-sortable="true") Sigs
-                      th(data-sortable="true") Destination    
-                      th(data-sortable="true") Region                
-                tbody
-                  for result in supersignatures
-                    tr
-                      td
-                        p=result.signatureId
-                      td
-                        p=result.destination
-                      td
-                        p=result.region
-          if expiredsignatures
-            div.table-container
-              table(class="table table-striped table-bordered table-hover", data-toggle="table")
-                thead
-                  tr: th(data-sortable="true") Expired Signatures
-                      th(data-sortable="true") Status                  
-                tbody
-                  for result in expiredsignatures
-                    tr
-                      td
-                        p=result.signatureId
-                      td
-                        p=result.status
+      div.tableoverflowcontainer
+        if supersignatures
+          div.table-container
+            table(class="table table-striped table-bordered table-hover", data-toggle="table")
+              thead
+                tr: th(data-sortable="true") Sigs
+                    th(data-sortable="true") Destination    
+                    th(data-sortable="true") Region                
+              tbody
+                for result in supersignatures
+                  tr
+                    td
+                      p=result.signatureId
+                    td
+                      p=result.destination
+                    td
+                      p=result.region
+        if expiredsignatures
+          div.table-container
+            table(class="table table-striped table-bordered table-hover", data-toggle="table")
+              thead
+                tr: th(data-sortable="true") Expired Signatures
+                    th(data-sortable="true") Status                  
+              tbody
+                for result in expiredsignatures
+                  tr
+                    td
+                      p=result.signatureId
+                    td
+                      p=result.status
