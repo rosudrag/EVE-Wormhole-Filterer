@@ -18,6 +18,4 @@
 
   module.exports.createCosmicSigModel = createCosmicSigModel;
   module.exports.getSigIds = getSigIds;
-  
-
 }());
