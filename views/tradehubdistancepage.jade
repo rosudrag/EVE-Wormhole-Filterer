@@ -3,6 +3,20 @@ extends ./layout
 block content
   script.
       $("#second-tab").addClass('active')
+      $(document).ready(function(){
+        var solarsystems = new Bloodhound({
+          datumTokenizer: Bloodhound.tokenizers.whitespace,
+          queryTokenizer: Bloodhound.tokenizers.whitespace,
+          // url points to a json file that contains an array of country names, see
+          // https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
+          prefetch: '/solarsystems.json'
+        });
+        $('.typeahead').typeahead(null, {
+          name: 'solarsystems',
+          source: solarsystems
+        });
+        console.log($('.typeahead'));
+      });
       
   section.page-section
     div.tableoverflowcontainer
@@ -19,11 +33,12 @@ block content
               tr
                 td.col-lg-4
                   div.input-group
-                    input(type="text", name="distancefrom", class="form-control", placeholder="Jita")
+                    input(type="text", name="distancefrom", class="form-control typeahead", placeholder=distances["Jita"].source)
                     span.input-group-btn
                       input(type="submit", value="submit", class="btn btn-default xs-mb-10 md-mb-0")
                 td= distances["Jita"].jumps
                 td= distances["Amarr"].jumps
                 td= distances["Hek"].jumps
                 td= distances["Rens"].jumps
+  
         

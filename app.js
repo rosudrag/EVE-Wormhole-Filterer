@@ -13,9 +13,12 @@ var EVEoj = require("EVEoj"),
         path: "\SDD_YC118_5_201605310"
     }),
     map;
+var solarSystems = {};
 SDD.LoadMeta().then(function() {
     map = EVEoj.map.Create(SDD, "K");
     return map.Load();
+}).then(function() {
+  solarSystems = Object.keys(map.GetSystems().map.sysNameMap);
 });
 
 function findSystemDistance(source, destination){
@@ -46,10 +49,6 @@ function findTradeHubDistances(source){
   results["Rens"] = findSystemDistance(source, "Rens");
   return results;
 }
-
-function formatSystemName(source){
-  return _iodash_.capitalize(source);
-}
 //--EVEoj
 
 var app = express();
@@ -58,7 +57,9 @@ app.set('view engine', 'jade');
 
 app.use(express.static(__dirname + '/public'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap-3-typeahead')); // redirect bootstrap JS typeahead
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
+app.use('/js', express.static(__dirname + '/node_modules/bloodhound-js/dist')); // redirect JS jQuery
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 app.use('/css', express.static(__dirname + '/node_modules/flexboxgrid/css'));
 app.use('/css', express.static(__dirname + '/bower_components/less-space/dist'));
@@ -70,6 +71,10 @@ app.get('/', function(req, res) {
   res.render('wormholefilterpage', {
     title: 'Thera Wormhole Filter App'
   });
+});
+
+app.get('/solarsystems.json', function(req, res) {
+  res.json(solarSystems);
 });
 
 app.get('/trade-hub-distance', function(req, res) {
@@ -84,9 +89,7 @@ app.post('/trade-hub-distance', urlencodedParser, function(req, res) {
   console.log("Got a POST request for the tradehubdistancepage");
 
   // Prepare output in JSON format
-   source=formatSystemName(req.body.distancefrom);
-   console.log(source);
-
+   source=req.body.distancefrom;
    if(source === undefined || source === ''){
      source = "Jita";
    }

@@ -14,6 +14,9 @@ SDD.LoadMeta()
     var amarr = map.GetSystem({name: "Amarr"});
     var route = map.Route(jita.ID, amarr.ID, [], false, false);
     console.log("Jita to Amarr route length: " + route.length);
+
+    var systems = map.GetSystems().map.sysNameMap;
+    console.log(systems);
 })
 .caught(function(err) {
     console.error(err);
