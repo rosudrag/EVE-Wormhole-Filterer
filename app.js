@@ -37,26 +37,27 @@ app.get('/solarsystems.json', function(req, res) {
 });
 
 app.get('/trade-hub-distance', function(req, res) {
-  var results = myEVEoj.findTradeHubDistances("Jita");
-  res.render('tradehubdistancepage', {
-    title: 'Thera Wormhole Filter App',
-    distances: results
+  myEVEoj.findTradeHubDistances("Jita", function(results){
+    res.render('tradehubdistancepage', {
+      title: 'Thera Wormhole Filter App',
+      distances: results
+    });
   });
 });
 
 app.post('/trade-hub-distance', urlencodedParser, function(req, res) {
   console.log("Got a POST request for the tradehubdistancepage");
-
   // Prepare output in JSON format
    source=req.body.distancefrom;
    if(source === undefined || source === ''){
      source = "Jita";
    }
-  var results = myEVEoj.findTradeHubDistances(source);
-  res.render('tradehubdistancepage', {
-    title: 'Thera Wormhole Filter App',
-    distances: results
-  });
+   myEVEoj.findTradeHubDistances(source, function(results){
+     res.render('tradehubdistancepage', {
+       title: 'Thera Wormhole Filter App',
+       distances: results
+     });
+   });
 });
 
 app.post('/', urlencodedParser, function (req, res) {

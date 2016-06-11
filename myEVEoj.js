@@ -1,6 +1,7 @@
 // someThings.js
 
 (function() {
+  var myClosestTheraHole = require("./myClosestTheraHole");
   //EVEoj
   var EVEoj = require("EVEoj"),
       SDD = EVEoj.SDD.Create("json", {
@@ -36,13 +37,13 @@
     }
   }
 
-  function findTradeHubDistances(source){
+  function findTradeHubDistances(source, callback){
     var results = {};
     results["Jita"] = findSystemDistance(source, "Jita");
     results["Amarr"] = findSystemDistance(source, "Amarr");
     results["Hek"] = findSystemDistance(source, "Hek");
     results["Rens"] = findSystemDistance(source, "Rens");
-    return results;
+    myClosestTheraHole.getMeTheraHole(source, results, callback);
   }
   //--EVEoj
 

@@ -1,23 +1,24 @@
-var EVEoj = require("EVEoj"),
-    SDD = EVEoj.SDD.Create("json", {
-        path: "\SDD_YC118_5_201605310"
-    }),
-    map;
+var request = require('request');
+var myClosestTheraHole = require("./myClosestTheraHole");
 
-SDD.LoadMeta()
-.then(function() {
-    map = EVEoj.map.Create(SDD, "K");
-    return map.Load();
-})
-.then(function() {
-    var jita = map.GetSystem({name: "Jita"});
-    var amarr = map.GetSystem({name: "Amarr"});
-    var route = map.Route(jita.ID, amarr.ID, [], false, false);
-    console.log("Jita to Amarr route length: " + route.length);
+function getRandomPonyFooArticle () {
+  return new Promise((resolve, reject) => {
+    request({url: 'https://www.eve-scout.com/api/wormholes?systemSearch=Jita', json: true}, (err, res, body) => {
+      if (err) {
+        reject(err); return;
+      }
+      resolve(body);
+    });
+  });
+}
 
-    var systems = map.GetSystems().map.sysNameMap;
-    console.log(systems);
-})
-.caught(function(err) {
-    console.error(err);
-});
+function ilog(txt){
+  console.log(txt);
+}
+
+
+function getMeTheraHole(){
+  myClosestTheraHole.getTheraHoleJsonResult("Jita").then(txt => ilog(txt));
+}
+
+getMeTheraHole();

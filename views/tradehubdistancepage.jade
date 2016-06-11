@@ -23,11 +23,13 @@ block content
         form(name="tradehubdistance", action="/trade-hub-distance", method="post")
           table(class="table table-striped table-bordered table-hover", data-toggle="table")
             thead
-              tr: th(data-sortable="true") Distance From
-                  th(data-sortable="true") Jita    
-                  th(data-sortable="true") Amarr      
-                  th(data-sortable="true") Hek   
-                  th(data-sortable="true") Rens             
+              tr  
+                th Distance From
+                th Jita    
+                th Amarr      
+                th Hek   
+                th Rens   
+                th Thera          
             tbody
               tr
                 td.col-lg-4
@@ -39,5 +41,7 @@ block content
                 td= distances["Amarr"].jumps
                 td= distances["Hek"].jumps
                 td= distances["Rens"].jumps
+                - var theraHoleString = distances["Thera"].jumps  + " " + distances["Thera"].source
+                td= theraHoleString
   
         
