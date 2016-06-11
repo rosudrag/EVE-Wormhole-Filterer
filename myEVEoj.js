@@ -45,8 +45,6 @@
   }
   //--EVEoj
 
-    module.exports.findTradeHubDistances = function() {
-        return findTradeHubDistances(source);
-    }
+    module.exports.findTradeHubDistances = findTradeHubDistances;
 
 }());

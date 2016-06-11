@@ -5,8 +5,9 @@ var _ = require('underscore');
 var _iodash_ = require('lodash');
 var request = require('request');
 var $ = require('jquery');
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var myEVEoj = require("./myEVEoj");
+var myWormholeFilter = require("./myWormholeFilter");
 
 
 var app = express();
@@ -67,8 +68,8 @@ app.post('/', urlencodedParser, function (req, res) {
         signatures:req.body.signatures
     };
 
-    var bookmarkSigIds = getSigIds(response.bookmarks);
-    var signaturesSigIds = getSigIds(response.signatures);
+    var bookmarkSigIds = myWormholeFilter.getSigIds(response.bookmarks);
+    var signaturesSigIds = myWormholeFilter.getSigIds(response.signatures);
 
     var missingScannedIds = _.difference(signaturesSigIds, bookmarkSigIds);
     var expiredIds = _.difference(bookmarkSigIds, signaturesSigIds);
@@ -94,17 +95,17 @@ app.post('/', urlencodedParser, function (req, res) {
       _.each(missingScannedIds, function(mySigId){
         var currentES = myFilteredEveScoutDict[mySigId];
         if(currentES){
-          mySigs[mySigId] = createCosmicSigModel(mySigId, currentES.destinationSolarSystem.name, currentES.destinationSolarSystem.region.name, "evescout");
+          mySigs[mySigId] = myWormholeFilter.createCosmicSigModel(mySigId, currentES.destinationSolarSystem.name, currentES.destinationSolarSystem.region.name, "evescout");
         }
         else{
-          mySigs[mySigId] = createCosmicSigModel(mySigId, "unknown", "unknown", "unscanned");
+          mySigs[mySigId] = myWormholeFilter.createCosmicSigModel(mySigId, "unknown", "unknown", "unscanned");
         }
       });
 
       //add expired ones
       var expiredSigs = {};
       _.each(expiredIds, function(expiredId){
-        expiredSigs[expiredId] = createCosmicSigModel(expiredId, "expired", "expired", "expired");
+        expiredSigs[expiredId] = myWormholeFilter.createCosmicSigModel(expiredId, "expired", "expired", "expired");
       });
 
       res.render('wormholefilterpage', {
@@ -114,23 +115,6 @@ app.post('/', urlencodedParser, function (req, res) {
       });
     });
 })
-
-function createCosmicSigModel(sigId, destination, region, status){
-  return {
-    signatureId: sigId,
-    destination: destination,
-    region: region,
-    status: status
-  };
-}
-
-function getSigIds(input){
-  var inputSplit = input.match(/^.*((\r\n|\n|\r)|$)/gm);
-  var sigIds = inputSplit.map(function(obj){
-    return obj.slice(0,3).toUpperCase();
-  })
-  return sigIds;
-}
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
