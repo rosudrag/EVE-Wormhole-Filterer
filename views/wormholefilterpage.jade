@@ -1,6 +1,8 @@
 extends ./layout
 
 block content
+  script.
+      $("#first-tab").addClass('active')
   section.page-section
     form(name="wormholefilter", action="/", method="post")
       div.row.center-xs.around-xs.middle-xs

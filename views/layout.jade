@@ -1,11 +1,11 @@
 html
   head
     title=title
-    link(href='/main.css', rel='stylesheet')
     link(href='/css/flexboxgrid.css', rel='stylesheet')
     link(href='/css/bootstrap.css', rel='stylesheet')
     link(href='/css/less-space.css', rel='stylesheet')
     link(href='/bootstrap-table.css', rel='stylesheet')
+    link(href='/main.css', rel='stylesheet')
     script(src='/js/jquery.min.js')
     script(src='/js/bootstrap.min.js')
     script(src='/bootstrap-table.js')
@@ -26,6 +26,12 @@ html
             h1.hero-headline Thera Inspector
           div.row.center-xs
             p.hero-headline Inspects your holes so you don't have to
+        div.container-fluid
+          ul.nav.nav-tabs
+            li(id='first-tab')
+              a(class='navbar-brand' href='/') Home
+            li(id='second-tab')
+              a(href='/trade-hub-distance') Trade Hub Distance
       div.wrap.container-fluid
         block content
     footer.page-footer
