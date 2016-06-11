@@ -13,6 +13,7 @@
       return map.Load();
   }).then(function() {
     solarSystems = Object.keys(map.GetSystems().map.sysNameMap);
+    module.exports.solarsystems = solarSystems;
   });
 
   function findSystemDistance(source, destination){
@@ -46,5 +47,4 @@
   //--EVEoj
 
     module.exports.findTradeHubDistances = findTradeHubDistances;
-
 }());

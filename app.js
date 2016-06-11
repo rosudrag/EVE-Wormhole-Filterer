@@ -33,7 +33,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/solarsystems.json', function(req, res) {
-  res.json(solarSystems);
+  res.json(myEVEoj.solarsystems);
 });
 
 app.get('/trade-hub-distance', function(req, res) {
@@ -73,8 +73,6 @@ app.post('/', urlencodedParser, function (req, res) {
 
     var missingScannedIds = _.difference(signaturesSigIds, bookmarkSigIds);
     var expiredIds = _.difference(bookmarkSigIds, signaturesSigIds);
-
-
 
     request({url: 'https://www.eve-scout.com/api/wormholes', json: true}, function(err, resES, json) {
       if (err) {
