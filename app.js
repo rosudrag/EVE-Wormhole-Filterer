@@ -2,11 +2,55 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var os = require('os');
 var _ = require('underscore');
+var _iodash_ = require('lodash');
 var request = require('request');
 var $ = require('jquery');
-
-
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+//EVEoj
+var EVEoj = require("EVEoj"),
+    SDD = EVEoj.SDD.Create("json", {
+        path: "\SDD_YC118_5_201605310"
+    }),
+    map;
+SDD.LoadMeta().then(function() {
+    map = EVEoj.map.Create(SDD, "K");
+    return map.Load();
+});
+
+function findSystemDistance(source, destination){
+  try{
+    var sourcesystem = map.GetSystem({name: source});
+    var destinationsystem = map.GetSystem({name: destination});
+    var route = map.Route(sourcesystem.ID, destinationsystem.ID, [], false, false);
+    return {
+      source: source,
+      destination: destination,
+      jumps: route.length
+    };
+  }
+  catch(ex){
+    return {
+      source: source,
+      destination: destination,
+      jumps: "N/A"
+    };
+  }
+}
+
+function findTradeHubDistances(source){
+  var results = {};
+  results["Jita"] = findSystemDistance(source, "Jita");
+  results["Amarr"] = findSystemDistance(source, "Amarr");
+  results["Hek"] = findSystemDistance(source, "Hek");
+  results["Rens"] = findSystemDistance(source, "Rens");
+  return results;
+}
+
+function formatSystemName(source){
+  return _iodash_.capitalize(source);
+}
+//--EVEoj
 
 var app = express();
 app.set('views', './views');
@@ -29,8 +73,27 @@ app.get('/', function(req, res) {
 });
 
 app.get('/trade-hub-distance', function(req, res) {
+  var results = findTradeHubDistances("Jita");
   res.render('tradehubdistancepage', {
-    title: 'Thera Wormhole Filter App'
+    title: 'Thera Wormhole Filter App',
+    distances: results
+  });
+});
+
+app.post('/trade-hub-distance', urlencodedParser, function(req, res) {
+  console.log("Got a POST request for the tradehubdistancepage");
+
+  // Prepare output in JSON format
+   source=formatSystemName(req.body.distancefrom);
+   console.log(source);
+
+   if(source === undefined || source === ''){
+     source = "Jita";
+   }
+  var results = findTradeHubDistances(source);
+  res.render('tradehubdistancepage', {
+    title: 'Thera Wormhole Filter App',
+    distances: results
   });
 });
 

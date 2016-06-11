@@ -7,6 +7,7 @@
   },
   "main": "app.js",
   "dependencies": {
+    "EVEoj": "^0.3.0",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
     "bootstrap-table": "^1.10.1",
@@ -16,6 +17,7 @@
     "flexboxgrid": "^6.3.0",
     "jade": "^1.11.0",
     "jquery": "^2.2.3",
+    "lodash": "^4.13.1",
     "request": "^2.72.0",
     "underscore": "^1.8.3",
     "xtend": "^4.0.1"
