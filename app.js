@@ -21,10 +21,9 @@ app.use('/css', express.static(__dirname + '/bower_components/less-space/dist'))
 
 app.set('port', (process.env.PORT || 5000));
 
-
 //Routes
 app.get('/', function(req, res) {
-  res.render('home', {
+  res.render('wormholefilterpage', {
     title: 'Thera Wormhole Filter App'
   });
 });
