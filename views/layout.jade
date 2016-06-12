@@ -1,6 +1,7 @@
 html
   head
     title=title
+    meta(name="viewport" content="initial-scale=1")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js')
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -21,11 +22,11 @@ html
     script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js')
     div.page
       div.container
-        header.jumbotron
+        div.jumbotron
           div.row.center-xs
-            h1.hero-headline Thera Inspector
+            h1 Thera Inspector
           div.row.center-xs
-            p.hero-headline Inspects your holes so you don't have to
+            p Inspects your holes so you don't have to
         div.container-fluid
           ul.nav.nav-tabs
             li(id='first-tab')

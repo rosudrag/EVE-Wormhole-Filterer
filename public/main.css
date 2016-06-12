@@ -7,20 +7,6 @@
   margin-bottom: 5px;
 }
 
-.hero {
-    box-sizing: border-box;
-    padding: 2rem;
-    background: #FFF;
-    border: 1px solid #FFF;
-    border-radius: 2px;
-}
-
-.hero-headline {
-    font-size: 3rem;
-    white-space: nowrap;
-    margin-bottom: 0;
-}
-
 .layout {
     display: flex;
     height: 100%;
