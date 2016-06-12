@@ -1,6 +1,8 @@
 extends ./layout
 
 block content
+  link(href='/typeahead.css', rel='stylesheet')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js')
   script.
       $("#second-tab").addClass('active')
       $(document).ready(function(){

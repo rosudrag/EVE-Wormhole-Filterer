@@ -23,10 +23,8 @@
       if(current.jumps > next.jumps && IsKnownSystem(next.wormholeDestinationSolarSystemId)){
         current = next;
       }
-      console.log(current.jumps);
       return current;
     }, {jumps: 999});
-    console.log(theraHole);
     result = {
       source: theraHole.destinationSolarSystem.name,
       destination: "Thera",
