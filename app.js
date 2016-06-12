@@ -8,9 +8,11 @@ var $ = require('jquery');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var myEVEoj = require("./myEVEoj");
 var myWormholeFilter = require("./myWormholeFilter");
+var compression = require('compression');
 
 
 var app = express();
+app.use(compression());
 app.set('views', './views');
 app.set('view engine', 'jade');
 

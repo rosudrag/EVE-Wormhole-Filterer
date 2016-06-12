@@ -12,6 +12,7 @@
     "bootstrap": "^3.3.6",
     "bootstrap-table": "^1.10.1",
     "bower": "^1.7.9",
+    "compression": "^1.6.2",
     "csv-parse": "^1.0.4",
     "express": "^4.13.4",
     "flexboxgrid": "^6.3.0",
