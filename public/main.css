@@ -62,3 +62,7 @@
 .table-container{
   margin-bottom: 10px;
 }
+
+.fixed-table-body{
+  height: auto;
+}
