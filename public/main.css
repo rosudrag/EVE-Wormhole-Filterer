@@ -63,6 +63,12 @@
   margin-bottom: 10px;
 }
 
-.fixed-table-body{
-  height: auto;
+.fixed-table-container{
+  padding-bottom: 5%;
+}
+
+.fixed-table-body {
+  overflow-x: initial;
+  overflow-y: initial;
+  height: initial;
 }
